@@ -39,7 +39,7 @@ public class MeteoBlueParser {
 		DayForecast dayForecast = new DayForecast();
 
 		Element datas = doc.select("div[data-day].active").first();
-		
+
 		dayForecast.setLastUpdateTime(extractLastUpdateTime(datas.text()));
 
 		// **********Daily datas************
@@ -133,7 +133,7 @@ public class MeteoBlueParser {
 		return dayForecast;
 	}
 
-	
+
 	private  String extractSunnyHours(String stringToSearch) {
 		// the pattern we want to search for
 		Pattern p = Pattern.compile(" (\\d*)h");
@@ -145,7 +145,7 @@ public class MeteoBlueParser {
 	    }
 		return null;
 	}
-	
+
 	private String extractPressure(String stringToSearch) {
 		// the pattern we want to search for
 		Pattern p = Pattern.compile(" (\\d*) ");
@@ -157,7 +157,7 @@ public class MeteoBlueParser {
 	    }
 		return null;
 	}
-	
+
 	private String extractSunrise(String stringToSearch) {
 		// the pattern we want to search for
 		Pattern p = Pattern.compile("\\D*(\\d{2}:\\d{2}).*");
@@ -169,7 +169,7 @@ public class MeteoBlueParser {
 	    }
 		return null;
 	}
-	
+
 	private String extractSunset(String stringToSearch) {
 		// the pattern we want to search for
 		Pattern p = Pattern.compile(".*(\\d{2}:\\d{2}).*");
@@ -181,10 +181,10 @@ public class MeteoBlueParser {
 	    }
 		return null;
 	}
-	
+
 	private String extractLastUpdateTime(String stringToSearch) {
 		// the pattern we want to search for
-		Pattern p = Pattern.compile("Dernière mise à jour: (.*) CEST");
+		Pattern p = Pattern.compile("Dernière mise à jour: (.*) CET");
 		Matcher m = p.matcher(stringToSearch);
 		if (m.find())
 	    {
@@ -199,7 +199,7 @@ public class MeteoBlueParser {
 		meteoBlueParser
 		.init("https://www.meteoblue.com/fr/meteo/prevision/semaine/la-comt%C3%A9_france_3009940?day=2");
 		DayForecast dayForecast = meteoBlueParser.getForecast();
-		
+
 		System.out.println(dayForecast);
 	}
 }
