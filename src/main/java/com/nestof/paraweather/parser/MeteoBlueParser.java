@@ -47,9 +47,9 @@ public class MeteoBlueParser {
 		dayForecast.setDate(date.attr("datetime"));
 
 		// Heures d'ensoleillement
-		Element sunnyHours = datas.select("div.clearfix div.sun div.sun_icon")
+		Element sunnyHours = datas.select("div.clearfix div.sun div.sun-icon")
 				.first();
-		dayForecast.setSunnyHours(Integer.parseInt(extractSunnyHours(sunnyHours.attr("title"))));
+		dayForecast.setSunnyHours(extractSunnyHours(sunnyHours.attr("title")));
 
 		// Lever / Couché soleil
 		Element sunHours = datas.select(
@@ -93,7 +93,7 @@ public class MeteoBlueParser {
 		}
 
 		// Pression atmosphérique
-		Element airpressure = datas.select("div.airpressure").first();
+		Element airpressure = datas.select("div.clearfix div.misc span").first();
 		dayForecast.setPressure(extractPressure(airpressure.text()));
 
 		// ****************Hourly datas***************
@@ -134,14 +134,14 @@ public class MeteoBlueParser {
 	}
 
 
-	private  String extractSunnyHours(String stringToSearch) {
+	private  Integer extractSunnyHours(String stringToSearch) {
 		// the pattern we want to search for
 		Pattern p = Pattern.compile(" (\\d*)h");
 		Matcher m = p.matcher(stringToSearch);
 		if (m.find())
 	    {
 	      // we're only looking for one group, so get it
-			return m.group(1);
+			return Integer.parseInt(m.group(1));
 	    }
 		return null;
 	}
