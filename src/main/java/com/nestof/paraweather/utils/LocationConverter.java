@@ -7,17 +7,17 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * LatLongConverter Class - converts Latitude/Longitude values between DMS and
  * Decimal Degrees Copyright (C) 2010 David Cox
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see http://www.gnu.org/licenses/
  *
@@ -33,7 +33,7 @@ public class LocationConverter {
 	/**
 	 * Returns a formatted DMS String. ie. DD MM' SS" E Uses values loaded into
 	 * Degrees, Minutes and Seconds
-	 * 
+	 *
 	 * @return String
 	 */
 	private String toFormattedDMSString() {
@@ -51,7 +51,7 @@ public class LocationConverter {
 	/**
 	 * Returns the Decimal Degrees that corresponds to the DMS values entered.
 	 * Requires values in Degrees, Minutes, Seconds, and Direction
-	 * 
+	 *
 	 * @return String
 	 */
 	public String toDecimalDegrees(String location) {
@@ -86,20 +86,20 @@ public class LocationConverter {
 
 		return returnString;
 	}
-	
+
 	public GeoLocation toDecimalDegrees(GeoLocation geoLocation){
 		if (GeoLocationType.DD.equals(geoLocation.getType())){
 			return geoLocation;
 		}
-		
+
 		return new GeoLocation(GeoLocationType.DD, toDecimalDegrees(geoLocation.getLatitude()), toDecimalDegrees(geoLocation.getLongitude()));
 	}
-	
+
 
 	/**
 	 * Returns a formatted DMS String using value loaded into DecimalDegrees ie.
 	 * DD MM' SS" E
-	 * 
+	 *
 	 * @return String
 	 */
 	public String toDMS(String DecimalDegreesAndMinutes, String type) {
@@ -145,31 +145,31 @@ public class LocationConverter {
 		return returnstring;
 
 	}
-	
+
 	public GeoLocation toDMS(GeoLocation geoLocation){
 		if (GeoLocationType.DMS.equals(geoLocation.getType())){
 			return geoLocation;
 		}
 		return new GeoLocation(GeoLocationType.DMS,toDMS(geoLocation.getLatitude(),"Latitude"), toDMS(geoLocation.getLongitude(),"Longitude"));
 	}
-	
-	
-	public static void main(String[] args) {
+
+
+/*	public static void main(String[] args) {
 		String latitude = "50° 25' 00.0\" N";
 		String longitude = "2° 30' 46.0\" E";
-		
+
 		GeoLocation geoLocation = new GeoLocation(GeoLocationType.DMS,latitude, longitude);
-		
-		
-		
+
+
+
 		LocationConverter locationConverter = new LocationConverter();
 		System.out.println(locationConverter.toDecimalDegrees(geoLocation));
-		
+
 		latitude = "50.41";
 		longitude = "2.51";
 		geoLocation = new GeoLocation(GeoLocationType.DD, latitude, longitude);
-		
+
 		System.out.println(locationConverter.toDMS(geoLocation));
-	}
+	}*/
 
 }

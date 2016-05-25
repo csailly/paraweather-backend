@@ -15,17 +15,7 @@ public class ForecastService {
 	@Autowired
 	MeteoBlueService meteoBlueService;
 
-	public DayForecast getForecast(LocalDate date) {
-		//1° Récupérer les sites
-		
-		//2° Pour chaque site récupérer les prévisions
-		
-		//3° Renvoyer une liste de prévisions
-		
-		
-		
-		GeoLocation geoLocation = new GeoLocation(GeoLocationType.DD,"50.43N", "2.49E");
-		
+	public DayForecast getForecast(LocalDate date, GeoLocation geoLocation) {
 		return meteoBlueService.getForecast(geoLocation, date);
 	}
 

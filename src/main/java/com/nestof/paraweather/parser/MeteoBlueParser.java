@@ -40,7 +40,6 @@ public class MeteoBlueParser {
 
 		Element datas = doc.select("div[data-day].active").first();
 
-		dayForecast.setLastUpdateTime(extractLastUpdateTime(datas.text()));
 
 		// **********Daily datas************
 		Element date = datas.select("tr.times > th time").first();
@@ -95,6 +94,9 @@ public class MeteoBlueParser {
 		// Pression atmosphérique
 		Element airpressure = datas.select("div.clearfix div.misc span").first();
 		dayForecast.setPressure(extractPressure(airpressure.text()));
+
+        Element lastUpdateTime = datas.select("div.clearfix div.misc span").last();
+        dayForecast.setLastUpdateTime(extractLastUpdateTime(lastUpdateTime.text()));
 
 		// ****************Hourly datas***************
 		Element hourly = datas.select("table.hourlywind").first();
@@ -184,7 +186,7 @@ public class MeteoBlueParser {
 
 	private String extractLastUpdateTime(String stringToSearch) {
 		// the pattern we want to search for
-		Pattern p = Pattern.compile("Dernière mise à jour: (.*) CET");
+		Pattern p = Pattern.compile("Dernière mise à jour: (.*)");
 		Matcher m = p.matcher(stringToSearch);
 		if (m.find())
 	    {
@@ -194,12 +196,12 @@ public class MeteoBlueParser {
 		return null;
 	}
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		MeteoBlueParser meteoBlueParser = new MeteoBlueParser();
 		meteoBlueParser
 		.init("https://www.meteoblue.com/fr/meteo/prevision/semaine/la-comt%C3%A9_france_3009940?day=2");
 		DayForecast dayForecast = meteoBlueParser.getForecast();
 
 		System.out.println(dayForecast);
-	}
+	}*/
 }
