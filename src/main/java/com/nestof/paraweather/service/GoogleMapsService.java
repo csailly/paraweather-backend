@@ -6,6 +6,8 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.nestof.paraweather.utils.GeoLocation;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
+import org.joda.time.ReadableInstant;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +26,7 @@ public class GoogleMapsService {
 
     public DirectionsLeg getDirections(GeoLocation from, GeoLocation to){
         try {
-            DirectionsResult directionsResult = DirectionsApi.getDirections(geoApiContext,from.getLatitude() + ","+from.getLongitude(), to.getLatitude() + ","+to.getLongitude()).await();
+            DirectionsResult directionsResult = DirectionsApi.getDirections(geoApiContext,from.getLatitude() + ","+from.getLongitude(), to.getLatitude() + ","+to.getLongitude()).departureTime(DateTime.now()).await();
             return directionsResult.routes[0].legs[0];
         } catch (Exception e) {
             log.error("Error try to get directions", e);
