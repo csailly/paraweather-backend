@@ -40,7 +40,6 @@ public class MeteoBlueParser {
 
 		Element datas = doc.select("div[data-day].active").first();
 
-
 		// **********Daily datas************
 		Element date = datas.select("tr.times > th time").first();
 		dayForecast.setDate(date.attr("datetime"));
